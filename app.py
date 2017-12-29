@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from cc_test_module.cc_test_module import rot13_encode
 import argparse
+from cc_test_module.cc_test_module import rot13_encode
 
 def arg_parse():
     parser = argparse.ArgumentParser()
@@ -12,7 +12,6 @@ def arg_parse():
                         required=True)
     results = parser.parse_args()
 
-
     inputs = dict()
     inputs['ins'] = results.ins
     return inputs
@@ -20,6 +19,4 @@ def arg_parse():
 
 if __name__ == '__main__':
     args = arg_parse()
-
     print(rot13_encode(args['ins']))
-
