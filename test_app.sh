@@ -26,10 +26,10 @@ function die {
 function prereqs {
     pip install pytest || die "pip install pytest failed"
 
-    if [ "$(hostname)" != "pluto.local" ]; then
-        info "find $cc_test_module_dir..."
-        find / -name "$cc_test_module_dir"
-    fi
+    #if [ "$(hostname)" != "pluto.local" ]; then
+    #    info "find $cc_test_module_dir..."
+    #    find / -name "foo_$cc_test_module_dir"
+    #fi
 
     info "install cc_test_module"
     pushd "$cc_test_module_dir" > /dev/null
