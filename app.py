@@ -6,7 +6,7 @@ Useful for testing from a concourse pipeline.
 """
 
 import argparse
-from cc_test_module.cc_test_module import rot13_encode
+from cc_test_module import rot13_encode
 
 def arg_parse():
     """ Parse some arg """

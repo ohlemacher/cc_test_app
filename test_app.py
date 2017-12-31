@@ -1,6 +1,6 @@
 import pytest
 import app
-from cc_test_module.cc_test_module import rot13_encode
+from cc_test_module import rot13_encode
 
 """
 Unit test app.py
