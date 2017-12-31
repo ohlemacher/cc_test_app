@@ -10,8 +10,6 @@ if [ "$(hostname)" == "pluto.local" ]; then
 else
     declare -r cc_test_app_dir="cc-test-app-repo"
     declare -r cc_test_module_dir="cc-test-module-repo"
-    # declare -r cc_test_app_dir="cc_test_app"
-    # declare -r cc_test_module_dir="cc_test_module"
 fi
 
 function info {
@@ -25,13 +23,8 @@ function die {
     exit 1
 }
 
-function prereqs {
+function install_prereqs {
     pip install pytest || die "pip install pytest failed"
-
-    #if [ "$(hostname)" != "pluto.local" ]; then
-    #    info "find $cc_test_module_dir..."
-    #    find / -name "foo_$cc_test_module_dir"
-    #fi
 
     info "install cc_test_module"
     pushd "$cc_test_module_dir" > /dev/null
@@ -46,6 +39,6 @@ function run_unit_tests {
     popd > /dev/null
 }
 
-prereqs
+install_prereqs
 run_unit_tests
 
