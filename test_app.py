@@ -7,14 +7,7 @@ Unit test app.py
   python -m pytest -v test_app.py
 """
 
-#@pytest.mark.parametrize("test_input,expected", [
-#    ("foo", "sbb"),
-#	("sbb", "foo"),
-#    ("bar", "one"),
-#    ("one", "bar"),
-#])
-
-@pytest.mark.parametrize("test_input,expected", [
+@pytest.mark.parametrize("test_input, expected", [
     ("foo", "FOO"),
 	("sbb", "SBB"),
     ("bar", "BAR"),
