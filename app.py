@@ -3,6 +3,7 @@
 """
 A trivial python script.
 Useful for testing from a concourse pipeline.
+
 """
 
 import argparse
