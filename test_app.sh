@@ -8,8 +8,10 @@ if [ "$(hostname)" == "pluto.local" ]; then
     declare -r cc_test_app_dir="cc_test_app"
     declare -r cc_test_module_dir="cc_test_module"
 else
-    declare -r cc_test_app_dir="cc_test_app"
-    declare -r cc_test_module_dir="cc_test_module"
+    declare -r cc_test_app_dir="cc-test-app-repo"
+    declare -r cc_test_module_dir="cc-test-module-repo"
+    # declare -r cc_test_app_dir="cc_test_app"
+    # declare -r cc_test_module_dir="cc_test_module"
 fi
 
 function info {
