@@ -14,12 +14,12 @@ fi
 
 function info {
     local msg="$1"
-    (>&2 echo "=== Info: $msg")  # Subshell avoids interactions with other redirections
+    (>&2 echo "  === Info: $msg")  # Subshell avoids interactions with other redirections
 }
 
 function die {
     local msg="$1"
-    (>&2 echo "!!! Fatal: $msg")  # Subshell avoids interactions with other redirections
+    (>&2 echo "  !!! Fatal: $msg")  # Subshell avoids interactions with other redirections
     exit 1
 }
 
