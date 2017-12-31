@@ -24,9 +24,10 @@ function die {
 }
 
 function install_prereqs {
+    info "Prereq: Install pytest"
     pip install pytest || die "pip install pytest failed"
 
-    info "install cc_test_module"
+    info "Prereq: Install cc_test_module"
     pushd "$cc_test_module_dir" > /dev/null
     pip install -e . || die "pip -e cc-test-module-repo install failed"
     popd > /dev/null
