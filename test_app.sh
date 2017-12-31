@@ -12,16 +12,24 @@ else
     declare -r cc_test_module_dir="cc-test-module-repo"
 fi
 
+function info {
+    local msg="$1"
+    (>&2 echo Info: "$msg")  # Subshell avoids interactions with other redirections
+}
+
 function die {
-    local msg=“$1”
-    (>&2 echo Fatal: “$msg”)  # Subshell avoids interactions with other redirections
+    local msg="$1"
+    (>&2 echo Fatal: "$msg")  # Subshell avoids interactions with other redirections
     exit 1
 }
 
 function prereqs {
     pip install pytest || die "pip install pytest failed"
 
-    find / -name "$cc_test_module_dir"
+    if [ "$(hostname)" != "pluto.local" ]; then
+        echo "find $cc_test_module_dir..."
+        find / -name "$cc_test_module_dir"
+    fi
 
     pushd "$cc_test_module_dir" > /dev/null
     pip install -e . || die "pip -e cc-test-module-repo install failed"
