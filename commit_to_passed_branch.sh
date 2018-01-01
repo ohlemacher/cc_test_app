@@ -32,11 +32,11 @@ function commit_to_branch {
     info "Commit to $br branch"
     pushd "$cc_test_app_dir" > /dev/null
     #git fetch origin develop           || die "git fetch develop failed"
-    git fetch origin "$br"             || die "git fetch $br failed"
+    #git fetch origin "$br"             || die "git fetch $br failed"
     #git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
     git checkout "$br"                 || die "git checkout $br failed"
     git rebase develop                 || die "git rebase develop for $br failed"
-    git push origin "$br"              || die "git push origin $br failed"
+    git push "$br"                     || die "git push origin $br failed"
     popd > /dev/null
 }
 
