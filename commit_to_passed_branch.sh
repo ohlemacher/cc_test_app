@@ -31,6 +31,8 @@ function commit_to_branch {
     local -r br="$1"
     info "Commit to $br branch"
     pushd "$cc_test_app_dir" > /dev/null
+    echo "pwd: $(pwd)"
+    echo "branch: $(git branch)"
     #git fetch origin develop           || die "git fetch develop failed"
     #git fetch origin "$br"             || die "git fetch $br failed"
     #git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
