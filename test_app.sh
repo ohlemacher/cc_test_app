@@ -38,6 +38,8 @@ function run_unit_tests {
     pushd "$cc_test_app_dir" > /dev/null
     python -m pytest -v test_app.py || die "app.py unit tests failed"
     popd > /dev/null
+
+	touch some-files/hello.txt
 }
 
 install_prereqs
