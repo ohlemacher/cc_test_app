@@ -34,7 +34,7 @@ function commit_to_branch {
     info "Commit to $br branch. Move HEAD to $head"
     git remote show origin
     git fetch origin                   || die "git fetch develop failed"
-    echo "$(git fetch origin "$br")"   || die "git fetch $br failed"
+    echo "git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
     #git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
     #git checkout "$br"                 || die "git checkout $br failed"
     git rebase "$head"                 || die "git rebase develop for $br failed"
