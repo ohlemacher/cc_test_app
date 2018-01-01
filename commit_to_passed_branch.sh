@@ -34,7 +34,7 @@ function commit_to_branch {
     info "Commit to $br branch. Move HEAD to $head"
 
     info "+++ fetch origin"
-    git fetch origin                   || die "git fetch develop failed"
+    git fetch --all                    || die "git fetch develop failed"
     echo "+++ git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
     #git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
     info "+++ git checkout $br"
