@@ -36,10 +36,13 @@ function commit_to_branch {
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
 
+    info "+++ git remote -v"
+    git remote -v                      || die "git remote -v failed"
+
     info "+++ git fetch --all"
     git fetch --all                    || die "git fetch --all failed"
-    info "+++ git fetch origin/passed_unit_tests"
-    git fetch passed_unit_tests        || die "git fetch passed_unit_tests failed"
+    info "+++ git fetch origin passed_unit_tests"
+    git fetch origin passed_unit_tests || die "git fetch passed_unit_tests failed"
     #echo "+++ git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
     info "git branch -avv"
     git branch -avv                    || die "git branc -avv failed"    
