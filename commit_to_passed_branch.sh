@@ -33,13 +33,16 @@ function commit_to_branch {
     local -r head="$(git rev-parse HEAD)"
     info "Commit to $br branch. Move HEAD to $head"
 
-    info "git remote update"
+    info "+++ git remote update"
     git remote update                  || die "git remote update failed"
 
     info "+++ fetch --all"
     git fetch --all                    || die "git fetch develop failed"
     #echo "+++ git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
-    info "+++ git checkout -b $br"
+    info "git branch -avv"
+    git branch -avv                    || die "git branc -avv failed"    
+
+    info "+++ git checkout -b origin/$br"
     git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
     #info "+++ git checkout $br"
     #git checkout "$br"                 || die "git checkout $br failed"
