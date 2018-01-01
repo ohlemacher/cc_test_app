@@ -38,7 +38,7 @@ function commit_to_branch {
 
     info "+++ git fetch --all"
     git fetch --all                    || die "git fetch --all failed"
-    info "+++ git fetch passed_unit_tests"
+    info "+++ git fetch origin/passed_unit_tests"
     git fetch passed_unit_tests        || die "git fetch passed_unit_tests failed"
     #echo "+++ git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
     info "git branch -avv"
