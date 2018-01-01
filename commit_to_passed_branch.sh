@@ -32,6 +32,7 @@ function commit_to_branch {
     pushd "$cc_test_app_dir" > /dev/null
     local -r head="$(git rev-parse HEAD)"
     info "Commit to $br branch. Move HEAD to $head"
+    git remote show origin
     git fetch origin                   || die "git fetch develop failed"
     git fetch origin "$br"             || die "git fetch $br failed"
     git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
