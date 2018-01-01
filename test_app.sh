@@ -39,6 +39,7 @@ function run_unit_tests {
     python -m pytest -v test_app.py || die "app.py unit tests failed"
     popd > /dev/null
 
+	info "Touch some-files/hello.txt"
 	touch some-files/hello.txt
 }
 
