@@ -31,9 +31,11 @@ function commit_to_branch {
     local -r br="$1"
     info "Commit to $br branch"
     pushd "$cc_test_app_dir" > /dev/null
-    git checkout "$br"    || die "git checkout $br failed"
-    git rebase develop    || die "git rebase develop for $br failed"
-    git push origin "$br" || die "git push failed"
+    git fetch origin develop || die "git fetch develop failed"
+    git fetch origin "$br"   || die "git fetch $br failed"
+    git checkout "$br"       || die "git checkout $br failed"
+    git rebase develop       || die "git rebase develop for $br failed"
+    git push origin "$br"    || die "git push origin $br failed"
     popd > /dev/null
 }
 
