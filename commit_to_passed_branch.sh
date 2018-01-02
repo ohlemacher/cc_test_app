@@ -37,14 +37,14 @@ function commit_to_branch {
     # ===== Info: +++ git checkout -b origin/passed_unit_tests
     # fatal: Cannot update paths and switch to branch 'passed_unit_tests' at the same time.
     # Did you intend to checkout 'origin/passed_unit_tests' which can not be resolved as commit?
-    #sed -i -- 's?fetch = +refs/heads/develop:refs/remotes/origin/develop?fetch = +refs/heads/*:refs/remotes/origin/*?g' .git/config || die "git config fix failed"
-    info "+++ Remove git origin" 
-    git remote rm origin               || die "git remote rm origin failed"
+    sed -i -- 's?fetch = +refs/heads/develop:refs/remotes/origin/develop?fetch = +refs/heads/*:refs/remotes/origin/*?g' .git/config || die "git config fix failed"
+    #info "+++ Remove git origin" 
+    #git remote rm origin               || die "git remote rm origin failed"
 
-    info "+++ Add git origin"
-    git remote add origin \
-        "git@github.com:$gh_user/cc_test_app.git" \
-                                       || die "Cannot add git origin" 
+    #info "+++ Add git origin"
+    #git remote add origin \
+    #    "git@github.com:$gh_user/cc_test_app.git" \
+    #                                   || die "Cannot add git origin" 
 
     info "+++ cat .git/config"
     cat .git/config                    || die "cat of git config failed"
