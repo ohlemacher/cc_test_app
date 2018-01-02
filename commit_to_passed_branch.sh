@@ -7,6 +7,7 @@ declare -r gh_user="ohlemacher"
 declare -r gh_token="dbd9a1b24133b564320e4fd23e2b30504fbaa55a"
 declare -r cc_test_app_dir="cc-test-app-repo"
 declare -r cc_test_module_dir="cc-test-module-repo"
+export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
 
 function info {
     local msg="$1"
