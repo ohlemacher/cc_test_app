@@ -39,6 +39,9 @@ function commit_to_branch {
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
     git fetch
+    
+    info "+++ git branch -a"
+    git branch -a
 
     info "+++ git remote -v"
     git remote -v                      || die "git remote -v failed"
