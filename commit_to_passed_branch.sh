@@ -61,7 +61,7 @@ function commit_to_branch {
     #git config github.token "$gh_token"
 
     info "+++ git remote update"
-    git remote update                  || die "git remote update failed"
+    #git remote update                  || die "git remote update failed"
     git fetch                          || die "git fetch failed"
     
     info "+++ git fetch origin passed_unit_tests"
