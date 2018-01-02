@@ -64,8 +64,8 @@ function commit_to_branch {
     info "+++ git rebase $head"
     git rebase "$head"                 || die "git rebase HEAD on $br branch failed"
 
-    info "+++ git push $br"
-    git push "origin $br"              || die "git push origin $br failed"
+    info "+++ git push origin $br"
+    git push origin "$br"              || die "git push origin $br failed"
 
     popd > /dev/null
 }
