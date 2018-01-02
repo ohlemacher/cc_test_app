@@ -43,6 +43,9 @@ function commit_to_branch {
     info "+++ git branch -a"
     git branch -a
 
+    info "+++ git branch -r"
+    git branch -r
+
     info "+++ git remote -v"
     git remote -v                      || die "git remote -v failed"
 
