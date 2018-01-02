@@ -3,7 +3,8 @@ set -o nounset
 set -o pipefail
 set -o errexit
 
-declare -r gh_token=dbd9a1b24133b564320e4fd23e2b30504fbaa55a
+declare -r gh_user="ohlemacher"
+declare -r gh_token="dbd9a1b24133b564320e4fd23e2b30504fbaa55a"
 declare -r cc_test_app_dir="cc-test-app-repo"
 declare -r cc_test_module_dir="cc-test-module-repo"
 
@@ -41,7 +42,7 @@ function commit_to_branch {
 
     info "+++ Add git origin"
     git remote add origin \
-        "https://github.com:$gh_token/cc_test_app.git" \
+        "https://github.com:$gh_user/cc_test_app.git" \
                                        || die "Cannot add git origin" 
 
     info "+++ cat .git/config"
