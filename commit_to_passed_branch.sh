@@ -30,7 +30,7 @@ function commit_to_branch {
 
     info "Commit to $br branch. Move HEAD to $head"
 
-    info "+++ Use sed to fix fetches in .git/config"
+    info "+++ Use sed develop to fix fetches in .git/config"
     # This fixes an issue where it was impossible to fetch the $br. Fetch ignored $br.
     # Trying to create the $br resulted in this error:
     # ===== Info: +++ git checkout -b origin/passed_unit_tests
@@ -48,16 +48,16 @@ function commit_to_branch {
     info "+++ cat .git/config"
     cat .git/config                    || die "cat of git config failed"
 
-    info "+++ add gh keyscan to known-hosts" # Used 'ssh-keyscan github.com'
-    mkdir "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
-    touch "$HOME/.ssh/known_hosts" 
-    chmod 600 "$HOME/.ssh/known_hosts"
-    cat gh.com.keyscan >> "$HOME/.ssh/known_hosts"
+    #info "+++ add gh keyscan to known-hosts" # Used 'ssh-keyscan github.com'
+    #mkdir "$HOME/.ssh"
+    #chmod 700 "$HOME/.ssh"
+    #touch "$HOME/.ssh/known_hosts" 
+    #chmod 600 "$HOME/.ssh/known_hosts"
+    #cat gh.com.keyscan >> "$HOME/.ssh/known_hosts"
 
     info "+++ configure gh"
     git config user.name "$gh_user"
-    git config github.token "$gh_token"
+    #git config github.token "$gh_token"
 
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
@@ -75,10 +75,11 @@ function commit_to_branch {
     info "+++ git rebase $head"
     git rebase "$head"                 || die "git rebase HEAD on $br branch failed"
 
-    info "+++ git push origin $br"
-    git push origin "$br"              || die "git push origin $br failed"
-
     popd > /dev/null
+ 
+    info "Create local clone"
+    rm -rf "${cc_test_app_dir}-passed-unit-tests"
+    git clone "$cc_test_app_dir" "${cc_test_app_dir}-passed-unit-tests"
 }
 
 declare -r branch="$1"
