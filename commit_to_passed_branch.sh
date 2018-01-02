@@ -47,6 +47,9 @@ function commit_to_branch {
     info "git branch -avv"
     git branch -avv                    || die "git branc -avv failed"    
 
+    info "git rev-parse origin/passed_unit_tests"
+    git rev-parse origin/passed_unit_tests || die "git rev-parse origin/passed_unit_tests failed"
+
     info "+++ git checkout -b origin/$br"
     git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
     #info "+++ git checkout $br"
