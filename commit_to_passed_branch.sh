@@ -33,6 +33,14 @@ function commit_to_branch {
     local -r head="$(git rev-parse HEAD)"
     info "Commit to $br branch. Move HEAD to $head"
 
+    info "+++ Use sed to fix fetches in .git/config"
+    # This fixes an issue where it was impossible to fetch the $br. Fetch ignored $br.
+    # Trying to create the $br resulted in this error:
+    # ===== Info: +++ git checkout -b origin/passed_unit_tests
+    # fatal: Cannot update paths and switch to branch 'passed_unit_tests' at the same time.
+    # Did you intend to checkout 'origin/passed_unit_tests' which can not be resolved as commit?
+    set -i -- 's?fetch = +refs/heads/develop:refs/remotes/origin/develop?fetch = +refs/heads/develop:refs/remotes/origin/*?' .git/config
+
     info "+++ cat .git/config"
     cat .git/config
 
