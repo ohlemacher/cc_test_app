@@ -33,6 +33,9 @@ function commit_to_branch {
     local -r head="$(git rev-parse HEAD)"
     info "Commit to $br branch. Move HEAD to $head"
 
+    info "update git"
+    apt-get update -y git              || die "git update failed"
+
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
 
