@@ -34,7 +34,7 @@ function commit_to_branch {
     info "Commit to $br branch. Move HEAD to $head"
 
     info "update git"
-    apt-get update -y git              || die "git update failed"
+    apt-get install --only-upgrade     || die "git update failed"
 
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
