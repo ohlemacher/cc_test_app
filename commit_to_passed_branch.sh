@@ -49,6 +49,8 @@ function commit_to_branch {
     cat .git/config                    || die "cat of git config failed"
 
     info "+++ add gh keyscan to known-hosts" # Used 'ssh-keyscan github.com'
+    mkdir "$HOME/.ssh"
+    chmod 700 "$HOME/.ssh"
     touch "$HOME/.ssh/known_hosts" 
     chmod 600 "$HOME/.ssh/known_hosts"
     cat gh.com.keyscan >> "$HOME/.ssh/known_hosts"
