@@ -48,6 +48,9 @@ function commit_to_branch {
     info "+++ cat .git/config"
     cat .git/config                    || die "cat of git config failed"
 
+    git config user.name "$gh_user"
+    git config github.token "$gh_token"
+
     info "+++ git remote update"
     git remote update                  || die "git remote update failed"
     git fetch                          || die "git fetch failed"
