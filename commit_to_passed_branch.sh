@@ -39,6 +39,9 @@ function commit_to_branch {
     info "+++ git remote -v"
     git remote -v                      || die "git remote -v failed"
 
+    info "+++ git remote show origin"
+    git remote show origin             || die "git remote show origin failed"
+
     info "+++ git fetch --all"
     git fetch --all                    || die "git fetch --all failed"
     info "+++ git fetch origin passed_unit_tests"
