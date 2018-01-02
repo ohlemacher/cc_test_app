@@ -42,7 +42,7 @@ function commit_to_branch {
 
     info "+++ Add git origin"
     git remote add origin \
-        "https://github.com/$gh_user/cc_test_app.git" \
+        "https://$gh_user:$gh_token@github.com/$gh_user/cc_test_app.git" \
                                        || die "Cannot add git origin" 
 
     info "+++ cat .git/config"
