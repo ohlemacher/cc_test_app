@@ -45,10 +45,10 @@ function commit_to_branch {
     git fetch origin passed_unit_tests || die "git fetch passed_unit_tests failed"
     #echo "+++ git fetch origin $br: $(git fetch origin "$br")"   || die "git fetch $br failed"
     info "git branch -avv"
-    git branch -avv                    || die "git branc -avv failed"    
+    git branch -avv                    || die "git branc -avv failed"
 
-    info "git rev-parse origin/master"
-    git rev-parse origin/master || die "git rev-parse origin/master failed"
+    #info "git rev-parse origin/passed_unit_tests --"
+    #git rev-parse origin/passed_unit_tests || die "git rev-parse origin/passed_unit_tests failed"
 
     info "+++ git checkout -b origin/$br"
     git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
