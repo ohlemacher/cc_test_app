@@ -86,13 +86,8 @@ function commit_to_branch {
 
 function commit_to_branch2 {
     local -r br="$1"
-    pushd "$cc_test_app_dir" > /dev/null
-    local -r head="$(git rev-parse HEAD)"
 
     info "Commit to $br branch. Move HEAD to $head"
-
-    info "pwd: $(pwd)"
-    info "ls: $(ls -l)"
   
     pushd ${cc_test_app_dir} > /dev/null
         # Create a branch named tested_commit from the tested commit
