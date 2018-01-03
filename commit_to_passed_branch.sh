@@ -63,7 +63,6 @@ function commit_to_branch {
     #info "+++ git remote update"
     #git remote update                  || die "git remote update failed"
     #git fetch                          || die "git fetch failed"
-
     
     info "+++ git fetch origin passed_unit_tests"
     git fetch origin passed_unit_tests || die "git fetch passed_unit_tests failed"
