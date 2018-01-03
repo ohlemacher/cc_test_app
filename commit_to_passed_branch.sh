@@ -83,5 +83,28 @@ function commit_to_branch {
     git clone "$cc_test_app_dir" "${cc_test_app_dir}-passed-unit-tests"
 }
 
+function commit_to_branch2 {
+    local -r br="$1"
+    pushd "$cc_test_app_dir" > /dev/null
+    local -r head="$(git rev-parse HEAD)"
+
+    info "Commit to $br branch. Move HEAD to $head"
+
+    pushd ${cc_test_app_dir} > /dev/null
+        # Create a branch named tested_commit from the tested commit
+        local -r tested_commit="$(git rev-parse HEAD)"
+        git branch tested_branch "$tested_commit" || die "git branch tested_branch $tested_commit failed"
+    popd > /dev/null
+
+    pushd cc-test-app-repo-passed-unit-tests > /dev/null
+        # Add and fetch tested_remote. Then rebase on it.
+        git remote add tested_remote ../cc-test-app-repo || die "git remote add tested_remote failed"
+        git fetch tested_remote || die "git fetch tested_remote failed"
+        git rebase tested_remote/tested_branch || die "git rebase tested_remote/tested_branch failed"
+    popd > /dev/null
+}
+
+### MAIN ### 
 declare -r branch="$1"
-commit_to_branch "$branch"
+# commit_to_branch "$branch"
+commit_to_branch2 "$branch"
