@@ -6,6 +6,7 @@ set -o errexit
 declare -r gh_user="ohlemacher"
 declare -r gh_token="dbd9a1b24133b564320e4fd23e2b30504fbaa55a"
 declare -r cc_test_app_dir="cc-test-app-repo"
+declare -r cc_test_app_passed_unit_teste_dir="cc-test-app-repo-passed-unit-tests"
 declare -r cc_test_module_dir="cc-test-module-repo"
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
 
@@ -90,6 +91,9 @@ function commit_to_branch2 {
 
     info "Commit to $br branch. Move HEAD to $head"
 
+    info "pwd: $(pwd)"
+    info "ls: $(ls -l)"
+  
     pushd ${cc_test_app_dir} > /dev/null
         # Create a branch named tested_commit from the tested commit
         local -r tested_commit="$(git rev-parse HEAD)"
