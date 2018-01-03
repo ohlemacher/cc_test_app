@@ -26,70 +26,13 @@ function install_prereqs {
 }
 
 function commit_to_branch {
-    local -r br="$1"
-    pushd "$cc_test_app_dir" > /dev/null
-    local -r head="$(git rev-parse HEAD)"
-
-    info "Commit to $br branch. Move HEAD to $head"
-
-    info "+++ Use sed develop to fix fetches in .git/config"
-    # This fixes an issue where it was impossible to fetch the $br. Fetch ignored $br.
-    # Trying to create the $br resulted in this error:
-    # ===== Info: +++ git checkout -b origin/passed_unit_tests
-    # fatal: Cannot update paths and switch to branch 'passed_unit_tests' at the same time.
-    # Did you intend to checkout 'origin/passed_unit_tests' which can not be resolved as commit?
-    sed -i -- 's?fetch = +refs/heads/develop:refs/remotes/origin/develop?fetch = +refs/heads/*:refs/remotes/origin/*?g' .git/config || die "git config fix failed"
-    #info "+++ Remove git origin" 
-    #git remote rm origin               || die "git remote rm origin failed"
-
-    #info "+++ Add git origin"
-    #git remote add origin \
-    #    "git@github.com:$gh_user/cc_test_app.git" \
-    #                                   || die "Cannot add git origin" 
-
-    info "+++ cat .git/config"
-    cat .git/config                    || die "cat of git config failed"
-
-    info "+++ add gh keyscan to known-hosts" # Used 'ssh-keyscan github.com'
-    mkdir "$HOME/.ssh"
-    chmod 700 "$HOME/.ssh"
-    touch "$HOME/.ssh/known_hosts" 
-    chmod 600 "$HOME/.ssh/known_hosts"
-    cat gh.com.keyscan >> "$HOME/.ssh/known_hosts"
-
-    info "+++ configure gh"
-    git config user.name "$gh_user"
-    #git config github.token "$gh_token"
-
-    #info "+++ git remote update"
-    #git remote update                  || die "git remote update failed"
-    #git fetch                          || die "git fetch failed"
-    
-    info "+++ git fetch origin passed_unit_tests"
-    git fetch origin passed_unit_tests || die "git fetch passed_unit_tests failed"
-
-    #info "+++ git remote show origin"
-    #git remote show origin             || die "git remote show origin failed"
-
-    info "+++ git checkout -b origin/$br"
-    git checkout -b "$br" "origin/$br" || die "git checkout $br failed"
-
-    info "+++ git rebase $head"
-    git rebase "$head"                 || die "git rebase HEAD on $br branch failed"
-
-    popd > /dev/null
- 
-    info "Create local clone"
-    rm -rf "${cc_test_app_dir}-passed-unit-tests"
-    git clone "$cc_test_app_dir" "${cc_test_app_dir}-passed-unit-tests"
-}
-
-function commit_to_branch2 {
+    # Use "git remote add <NAME> <PATH>" to rebase.
     local -r br="$1"
 
     pushd ${cc_test_app_dir} > /dev/null
-        # Create a branch named tested_commit from the tested commit
+        # Create a branch named tested_branch from the tested commit
         local -r tested_commit="$(git rev-parse HEAD)"
+        local -r tested_path="$(realpath .)"
         git branch tested_branch "$tested_commit" || die "git branch tested_branch $tested_commit failed"
     popd > /dev/null
 
@@ -97,7 +40,7 @@ function commit_to_branch2 {
 
     pushd cc-test-app-repo-passed-unit-tests > /dev/null
         # Add and fetch tested_remote. Then rebase on it.
-        git remote add tested_remote ../cc-test-app-repo || die "git remote add tested_remote failed"
+        git remote add tested_remote "$tested_path" || die "git remote add tested_remote $tested_path failed"
         git fetch tested_remote || die "git fetch tested_remote failed"
         git rebase tested_remote/tested_branch || die "git rebase tested_remote/tested_branch failed"
     popd > /dev/null
@@ -105,5 +48,4 @@ function commit_to_branch2 {
 
 ### MAIN ### 
 declare -r branch="$1"
-# commit_to_branch "$branch"
-commit_to_branch2 "$branch"
+commit_to_branch "$branch"
